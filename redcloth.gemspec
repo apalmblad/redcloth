@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   s.homepage    = "http://redcloth.org"
   s.rubyforge_project = "redcloth"
 
-  s.rubygems_version   = "2.2.1"
   s.default_executable = "redcloth"
+  s.specification_version = 3
 
   s.files            = Dir['.gemtest', '.rspec', 'CHANGELOG', 'COPYING', 'Gemfile', 'README.rdoc', 'Rakefile', 'doc/**/*', 'bin/**/*', 'lib/**/*', 'redcloth.gemspec', 'spec/**/*', 'tasks/**/*']
   s.test_files       = Dir['spec/**/*']
