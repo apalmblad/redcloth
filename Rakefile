@@ -16,3 +16,8 @@ else
   Bundler.setup(:default, :development)
   load 'tasks/rspec.rake'
 end
+
+desc "Validate the gemspec"
+task :gemspec do
+  gemspec.validate
+end
