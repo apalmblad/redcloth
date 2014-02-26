@@ -4,9 +4,9 @@ describe RedCloth do
   
   describe "#new" do
     it "should accept options" do
-      lambda {
+      expect {
         RedCloth.new("test", [:hard_breaks])
-      }.should_not raise_error(ArgumentError)
+      }.not_to raise_error
     end
   end
   
