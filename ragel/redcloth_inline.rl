@@ -34,14 +34,15 @@
   # auto linking
   auto_link_proto_or_dubs = ( ("http" "s"? "://" ) | "www.") ;
   auto_link_url = ( auto_link_proto_or_dubs (uchar | reserved | '%')* ) ;
-  auto_link_in_a_tag = ( "<" [aA] space+ AttrSet* (AttrEnd)? ">" auto_link_url :> end_tag_noactions ) %T > X ;
-  auto_link = ( auto_link_url >A %{ STORE_URL("href"); } ) > X ;
-  email_start = ( alpha | digit );
-  email_domain = ( alpha | digit | "." ) + "." alpha+
-  email_local_part = email_start ( alpha | digit | "." | "+" | "-" )*
-  email_address_text = ( email_local_part "@" email_domain )
-  email_address = ( email_address_text >A %{ STORE_URL("mailto"); } ) > X ;
-  email_link_in_a_tag = ( "<" [aA] space+ AttrSet* (AttrEnd)? ">" email_address_text :> end_tag_noactions ) %T > X ;
+  auto_link_in_a_tag = ( "<" [aA] space+ AttrSet* (AttrEnd)? ">" auto_link_url :> end_tag_noactions ) %T >X ;
+  auto_link = ( auto_link_url >A %{ STORE_URL("href"); } ) >X ;
+  
+  email_start = alnum ;
+  email_domain = (alnum | "-" | "." | "_" )+;
+  email_local_part = email_start ( alnum | "." | "+" | "-" )* ;
+  email_address_text = email_local_part "@" email_domain ;
+  email_address = ( email_address_text >A %{ STORE_URL("mailto"); } ) >X ;
+  email_link_in_a_tag = ( "<" [aA] space+ AttrSet* (AttrEnd)? ">" email_address_text :> end_tag_noactions ) %T >X ;
 
 
   # images
@@ -127,7 +128,7 @@
     auto_link_in_a_tag { CAT(block); };
     auto_link { INLINE(block, "auto_link"); };
     email_link_in_a_tag { CAT(block); };
-    auto_link { INLINE(block, "auto_link"); };
+    email_address { INLINE(block, "auto_link"); };
 
 
     

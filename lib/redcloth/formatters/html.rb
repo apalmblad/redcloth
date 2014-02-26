@@ -13,6 +13,23 @@ module RedCloth::Formatters::HTML
       "<#{m}#{pba(opts)}>#{opts[:text]}</#{m}>"
     end
   end
+  def auto_link( opts )
+    #puts opts.inspect
+    link = opts[:href] || opts[:mailto]
+    href = if opts[:mailto]
+      "mailto:#{opts[:mailto]}"
+    else
+      h = opts[:href]
+      h = "http://#{h}" unless opts[:href] =~ /^http/i
+      if opts[:href] =~ /^https?:\/\/(?:www.)?teampages\.com(\/.*)$/
+        puts $1
+        $1
+      else
+        h
+      end
+    end
+    "<a rel=\"nofollow\" href=\"#{escape_attribute( href )}\">#{escape_attribute( link )}</a>"
+  end
   
   def hr(opts)
     "<hr#{pba(opts)} />\n"

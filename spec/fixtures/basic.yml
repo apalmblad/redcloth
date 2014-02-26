@@ -293,7 +293,7 @@ lite_mode_html: Convert with <code>r.to_html</code>
 ---
 name: code phrases not created with multiple email addresses
 in: Please email why@domain.com or jason@domain.com.
-html: <p>Please email why@domain.com or jason@domain.com.</p>
+html: <p>Please email <a rel="nofollow" href="mailto:why@domain.com">why@domain.com</a> or <a rel="nofollow" href="mailto:jason@domain.com">jason@domain.com</a>.</p>
 --- 
 name: del
 desc: To indicate a passage which has been deleted, surround the passage with hypens.
@@ -355,8 +355,15 @@ in: |-
   http://blah.com/one%20two%20three
   (min)5%-95%(max)
 html: |-
-  <p>http://blah.com/one%20two%20three<br />
+  <p><a rel="nofollow" href="http://blah.com/one%20two%20three">http://blah.com/one%20two%20three</a><br />
   (min)5%-95%(max)</p>
+---
+name: email address
+desc: Quick email test
+in: |-
+  test@gmail.com is my email address
+html: |-
+  <p><a rel="nofollow" href="mailto:test@gmail.com">test@gmail.com</a> is my email address</p>
 --- 
 name: css class
 desc: A block can be tagged with a CSS class by circling the class in parentheses and placing it just before the period which marks the block.

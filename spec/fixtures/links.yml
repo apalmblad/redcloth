@@ -289,3 +289,47 @@ in: |-
   "<r:attachment:image name="checkmark.gif" alt="Apply online" />*apply online*":/admissions/apply/
 html: |-
   <p><a href="/admissions/apply/"><r:attachment:image name="checkmark.gif" alt="Apply online" /><strong>apply online</strong></a></p>
+---
+name: autolink at end of block
+in: 'This is an autolink here: http://google.com?q=mysearchterm'
+auto_link_urls_html: '<p>This is an autolink here: <a href="http://google.com?q=mysearchterm">http://google.com?q=mysearchterm</a></p>'
+---
+name: autolink at beginning of block
+in: 'http://google.com?q=mysearchterm is an autolink'
+auto_link_urls_html: '<p><a href="http://google.com?q=mysearchterm">http://google.com?q=mysearchterm</a> is an autolink</p>'
+---
+name: https autolink
+in: 'This is an autolink here: https://google.com?q=mysearchterm'
+auto_link_urls_html: '<p>This is an autolink here: <a href="https://google.com?q=mysearchterm">https://google.com?q=mysearchterm</a></p>'
+---
+name: triple dubs autolink
+in: 'This is an autolink here: www.google.com?q=mysearchterm'
+auto_link_urls_html: '<p>This is an autolink here: <a href="http://www.google.com?q=mysearchterm">www.google.com?q=mysearchterm</a></p>'
+---
+name: autolink in quotes
+in: 'heyooo this:"http://zombo.com" is zombo.com'
+auto_link_urls_html: '<p>heyooo this:&#8220;<a href="http://zombo.com">http://zombo.com</a>&#8221; is zombo.com</p>'
+---
+name: no autolink in attributes
+in: 'please dont screw with <a href="http://www.mylink.com">my link</a>'
+auto_link_urls_html: '<p>please dont screw with <a href="http://www.mylink.com">my link</a></p>'
+---
+name: no autolink in an anchor
+in: 'please dont screw with <a href="http://www.mylink.com">http://www.mylink.com</a>'
+auto_link_urls_html: '<p>please dont screw with <a href="http://www.mylink.com">http://www.mylink.com</a></p>'
+---
+name: double autolink
+in: "Visit www.cnn.com or http://www.foxnews.com for information."
+html: '<p>Visit <a rel="nofollow" href="http://www.cnn.com">www.cnn.com</a> or <a rel="nofollow" href="http://www.foxnews.com">http://www.foxnews.com</a> for information.</p>'
+---
+name: email autolink
+in: "Email me at test@domain.com!"
+html: '<p>Email me at <a rel="nofollow" href="mailto:test@domain.com">test@domain.com</a>!</p>'
+---
+name: email double link
+in: Email me at test@domain.com or there@here.com!
+html: <p>Email me at <a rel="nofollow" href="mailto:test@domain.com">test@domain.com</a> or <a rel="nofollow" href="mailto:there@here.com">there@here.com</a>!</p>
+---
+name: email ending with period
+in: Email me at test@domain.com.
+html: <p>Email me at <a rel="nofollow" href="mailto:test@domain.com">test@domain.com</a>.</p>
