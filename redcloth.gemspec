@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
   s.files -= Dir['lib/**/*.so']
 
   s.platform = RUBY_PLATFORM[/java/] || 'ruby'
-  #s.files += %w[attributes inline scan].map {|f| "ext/redcloth_scan/redcloth_#{f}.c"}
+  s.files += %w[attributes inline scan].map {|f| "ext/redcloth_scan/redcloth_#{f}.c"}
   s.files += ["ext/redcloth_scan/redcloth.h"]
   s.extensions = Dir['ext/**/extconf.rb']
 
