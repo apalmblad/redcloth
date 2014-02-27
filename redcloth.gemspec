@@ -30,8 +30,8 @@ Gem::Specification.new do |s|
 
   s.platform = RUBY_PLATFORM[/java/] || 'ruby'
   s.files += %w[attributes inline scan].map {|f| "ext/redcloth_scan/redcloth_#{f}.c"}
-  s.files += ["ext/redcloth_scan/redcloth.h"]
-  s.files += Dir['ext/**/extconf.rb']
+  s.files << "ext/redcloth_scan/redcloth.h"
+  s.files << 'ext/redcloth_scan/extconf.rb'
   s.extensions = Dir['ext/**/extconf.rb']
 
   s.add_development_dependency('bundler', '~> 1.2')
