@@ -29,14 +29,9 @@ Gem::Specification.new do |s|
   s.files -= Dir['lib/**/*.so']
 
   s.platform = RUBY_PLATFORM[/java/] || 'ruby'
-  case s.platform.to_s
-  when /java/
-    s.files += ['lib/redcloth_scan.jar']
-  else # MRI or Rubinius
-    s.files += %w[attributes inline scan].map {|f| "ext/redcloth_scan/redcloth_#{f}.c"}
-    s.files += ["ext/redcloth_scan/redcloth.h"]
-    s.extensions = Dir['ext/**/extconf.rb']
-  end
+  s.files += %w[attributes inline scan].map {|f| "ext/redcloth_scan/redcloth_#{f}.c"}
+  s.files += ["ext/redcloth_scan/redcloth.h"]
+  s.extensions = Dir['ext/**/extconf.rb']
 
   s.add_development_dependency('bundler', '~> 1.2')
   s.add_development_dependency('rake', '~> 10.0')
