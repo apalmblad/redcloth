@@ -1,15 +1,16 @@
 namespace :release do
-  desc 'Upload all packages and tag git'
-  task :all => ['build:all', :release, :push_native_gems]
+  desc 'Push all gems to rubygems.org'
+  # git tag and push tag
+  # git tag vx.x.x
+  # git push --follow-tags
+  # branch into stable vx.x branch
+  # change version in version.rb
+  # update changelog
+  # run rake test
 
-  desc 'Push all gems to rubygems.org (gemcutter)'
-  task :push_native_gems do
-    Dir.chdir('pkg') do
-      Dir['*.gem'].select {|g| g =~ /\w+-[^-]+-\w+.gem/ }.each do |gem_file|
-        sh("gem push #{gem_file}")
-      end
-    end
+  task :gem do
+    sh("gem build redcloth.gemspec")
+    sh("gem push RedCloth-*.gem")
   end
 end
 
-Rake::Task['release'].prerequisites.unshift('build')

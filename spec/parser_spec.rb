@@ -6,13 +6,13 @@ describe RedCloth do
     it "should accept options" do
       expect {
         RedCloth.new("test", [:hard_breaks])
-      }.not_to raise_error
+      }.should_not raise_error
     end
   end
   
   it "should have a VERSION" do
-    RedCloth.const_defined?("VERSION").should be_true
-    RedCloth::VERSION.const_defined?("STRING").should be_true
+    RedCloth.const_defined?("VERSION").should be_truthy
+    RedCloth::VERSION.const_defined?("STRING").should be_truthy
   end
   
   it "should show the version as a string" do
@@ -21,7 +21,7 @@ describe RedCloth do
   end
   
   it "should have EXTENSION_LANGUAGE" do
-    RedCloth.const_defined?("EXTENSION_LANGUAGE").should be_true
+    RedCloth.const_defined?("EXTENSION_LANGUAGE").should be_truthy
     RedCloth::EXTENSION_LANGUAGE.should_not be_empty
     RedCloth::DESCRIPTION.should include(RedCloth::EXTENSION_LANGUAGE)
   end
@@ -85,8 +85,9 @@ describe RedCloth do
   
   if RUBY_VERSION > "1.9.0"
     it "should preserve character encoding" do
-      input = "This is an ISO-8859-1 string"
+      input = "This is an ISO-8859-1 string".dup
       input.force_encoding 'iso-8859-1'
+
       output = RedCloth.new(input).to_html
       
       output.should == "<p>This is an <span class=\"caps\">ISO</span>-8859-1 string</p>"
@@ -94,7 +95,7 @@ describe RedCloth do
     end
     
     it "should not raise ArgumentError: invalid byte sequence" do
-      s = "\xa3"
+      s = "\xa3".dup
       s.force_encoding 'iso-8859-1'
       lambda { RedCloth.new(s).to_html }.should_not raise_error
     end

@@ -1,7 +1,6 @@
 # encoding: utf-8
 require 'rubygems'
 require 'bundler'
-ENV['RUBYOPT'] = nil # Necessary to prevent Bundler from *&^%$#ing up rake-compiler.
 
 require 'rake/clean'
 
@@ -15,9 +14,4 @@ else
   Bundler.settings.without = [:compilation]
   Bundler.setup(:default, :development)
   load 'tasks/rspec.rake'
-end
-
-desc "Validate the gemspec"
-task :gemspec do
-  gemspec.validate
 end
